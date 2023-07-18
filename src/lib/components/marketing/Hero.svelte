@@ -3,7 +3,7 @@
 </script>
 
 <!-- Hero -->
-<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
 	<!-- Grid -->
 	<div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
 		<div>
@@ -21,7 +21,7 @@
 			<!-- Buttons -->
 			<div class="mt-7 grid gap-3 w-full sm:inline-flex">
 				<a
-					class="inline-flex justify-center items-center gap-x-3 text-center bg-secondary-600 hover:bg-secondary-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
+					class="btn btn-lg variant-filled-secondary inline-flex justify-center items-center gap-x-3 text-center"
 					href={redirect}
 				>
 					Get started
