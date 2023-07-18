@@ -16,7 +16,7 @@
 		{#if !$user.data?.getUser}
 			<AppBar class="bg-surface-100-800-token p-4 shadow-xl">
 				<svelte:fragment slot="lead"
-					><a class="text-primary-600 text-lg font-bold" href="/">Gigachad</a
+					><a class="text-primary-600 text-2xl font-bold" href="/">Gigachad</a
 					></svelte:fragment
 				>
 				<svelte:fragment slot="trail">
@@ -31,7 +31,7 @@
 		{:else}
 			<AppBar class="bg-surface-100-800-token p-4 shadow-xl">
 				<svelte:fragment slot="lead"
-					><a class="text-primary-600 text-lg font-bold" href="/">Gigachad</a
+					><a class="text-primary-600 text-2xl font-bold" href="/">Gigachad</a
 					></svelte:fragment
 				>
 				<svelte:fragment slot="trail">
