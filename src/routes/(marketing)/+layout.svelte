@@ -35,8 +35,8 @@
 					></svelte:fragment
 				>
 				<svelte:fragment slot="trail">
-					<a class="btn variant-ghost-primary" href="/auth?mode=signin"
-						>Sign In</a
+					<a class="btn variant-filled-primary" href="/dashboard"
+						>Dashboard</a
 					>
 				</svelte:fragment>
 			</AppBar>
