@@ -5,9 +5,11 @@
 	import { focusTrap } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { ValidationMessage, reporter } from '@felte/reporter-svelte';
-	import Error from './helpers/Error.svelte';
+	import { reporter } from '@felte/reporter-svelte';
+	import InputError from './helpers/InputError.svelte';
 	import { graphql } from '$houdini';
+	import GraphqlMutationError from './helpers/GraphqlMutationError.svelte';
+	import type { GraphqlError } from './helpers/graphql';
 	let currentPath = $page.url.pathname;
 	let isFocused: boolean = true;
 
@@ -32,21 +34,23 @@
 			}
 		}
 	`);
-
-	const { form } = createForm<z.infer<typeof signupSchema>>({
+	let graphqlMutationError: GraphqlError = null;
+	const { form, isSubmitting, isValid } = createForm<
+		z.infer<typeof signupSchema>
+	>({
 		onSubmit: async (values) => {
 			const res = await createUserMutation.mutate({
-				input:{
+				input: {
 					email: values.email,
 					name: values.name,
 					username: values.username,
-					hashedPassword: values.password,
+					hashedPassword: values.password
 				}
-			})
-			console.log(res.data?.createUser.id)
-			if(res.data && res.data.createUser.id){
-				goto("/dashboard")
+			});
+			if (res.data && res.data.createUser.id) {
+				goto('/auth/verify');
 			}
+			graphqlMutationError = res.errors
 		},
 		extend: [validator({ schema: signupSchema }), reporter]
 	});
@@ -94,9 +98,7 @@
 							title="Input (email)"
 							required
 						/>
-						<ValidationMessage for="email" let:messages>
-							<Error {messages} />
-						</ValidationMessage>
+						<InputError forInput="email" />
 					</div>
 					<!-- End Form Group -->
 
@@ -113,9 +115,7 @@
 							class="input"
 							required
 						/>
-						<ValidationMessage for="name" let:messages>
-							<Error {messages} />
-						</ValidationMessage>
+						<InputError forInput="name" />
 					</div>
 					<!-- End Form Group -->
 
@@ -132,9 +132,7 @@
 							class="input"
 							required
 						/>
-						<ValidationMessage for="username" let:messages>
-							<Error {messages} />
-						</ValidationMessage>
+						<InputError forInput="username" />
 					</div>
 					<!-- End Form Group -->
 
@@ -151,9 +149,7 @@
 							class="input"
 							required
 						/>
-						<ValidationMessage for="password" let:messages>
-							<Error {messages} />
-						</ValidationMessage>
+						<InputError forInput="passwrod" />
 					</div>
 					<!-- End Form Group -->
 
@@ -170,16 +166,14 @@
 							class="input"
 							required
 						/>
-						<ValidationMessage for="confirmPassword" let:messages>
-							<Error {messages} />
-						</ValidationMessage>
+						<InputError forInput="confirmPassword" />
 					</div>
 					<!-- End Form Group -->
-
+					<GraphqlMutationError graphqlMutationError={graphqlMutationError}/>
 					<button
 						type="submit"
 						class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary-500 text-white dark:text-gray-800 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-						>Sign up</button
+						disabled={$isSubmitting || !$isValid}>Sign up</button
 					>
 				</div>
 			</form>
