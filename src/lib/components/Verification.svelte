@@ -10,6 +10,10 @@
 	import wretch from 'wretch';
 	import GraphqlMutationError from './helpers/GraphqlMutationError.svelte';
 	import type { GraphqlError } from './helpers/graphql';
+	import { page } from '$app/stores';
+
+	let emailParams = $page.url.searchParams.get('email');
+	$: email = emailParams ? emailParams : '(your email)';
 
 	const tokenSchema = z.object({
 		token: z.string().min(26).max(26)
@@ -27,7 +31,7 @@
 		}
 	`);
 
-	let graphqlMutationError : GraphqlError = null
+	let graphqlMutationError: GraphqlError = null;
 
 	const { form, isSubmitting, isValid } = createForm<
 		z.infer<typeof tokenSchema>
@@ -46,7 +50,7 @@
 					.json((res) => console.log(res));
 				window.location.assign('/dashboard');
 			}
-			graphqlMutationError = res.errors
+			graphqlMutationError = res.errors;
 		},
 		extend: [validator({ schema: tokenSchema }), reporter]
 	});
@@ -61,7 +65,7 @@
 				We sent you token
 			</h1>
 			<p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-				Enter it below to verify (your email)
+				Enter it below to verify {email}
 			</p>
 		</div>
 
@@ -91,7 +95,7 @@
 						<InputError forInput="token" />
 					</div>
 					<!-- End Form Group -->
-					<GraphqlMutationError graphqlMutationError={graphqlMutationError} />
+					<GraphqlMutationError {graphqlMutationError} />
 					<button
 						type="submit"
 						class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary-500 text-white dark:text-gray-800 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
