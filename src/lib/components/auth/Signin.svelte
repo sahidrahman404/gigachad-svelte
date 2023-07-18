@@ -3,10 +3,10 @@
 	import { page } from '$app/stores';
 	import { graphql } from '$houdini';
 	import { z } from 'zod';
-	import GraphqlMutationError from './helpers/GraphqlMutationError.svelte';
-	import InputError from './helpers/InputError.svelte';
+	import GraphqlMutationError from '../helpers/GraphqlMutationError.svelte';
+	import InputError from '../helpers/InputError.svelte';
 	import { createForm } from 'felte';
-	import type { GraphqlError } from './helpers/graphql';
+	import type { GraphqlError } from '../helpers/graphql';
 	import { focusTrap } from '@skeletonlabs/skeleton';
 	import { reporter } from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
@@ -73,7 +73,7 @@
 					on:click={() => {
 						goto(`${currentPath}?mode=signup`);
 					}}
-					class="text-blue-600 decoration-2 hover:underline font-medium"
+					class="text-primary-600 decoration-2 hover:underline font-medium"
 				>
 					Sign up here
 				</button>
@@ -106,7 +106,7 @@
 							>
 							<a
 								class="text-sm text-tertiary-600 decoration-2 hover:underline font-medium"
-								href="/auth/verify?mode=resend">Forgot Password?</a
+								href="/auth/forgot?mode=send">Forgot Password?</a
 							>
 						</div>
 						<input

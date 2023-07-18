@@ -6,10 +6,10 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { reporter } from '@felte/reporter-svelte';
-	import InputError from './helpers/InputError.svelte';
+	import InputError from '../helpers/InputError.svelte';
 	import { graphql } from '$houdini';
-	import GraphqlMutationError from './helpers/GraphqlMutationError.svelte';
-	import type { GraphqlError } from './helpers/graphql';
+	import GraphqlMutationError from '../helpers/GraphqlMutationError.svelte';
+	import type { GraphqlError } from '../helpers/graphql';
 	let currentPath = $page.url.pathname;
 	let isFocused: boolean = true;
 
@@ -64,7 +64,7 @@
 			<h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
 				Sign up
 			</h1>
-			<p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+			<p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
 				Already have an account?
 				<button
 					on:click={() => {

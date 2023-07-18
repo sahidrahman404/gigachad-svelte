@@ -6,10 +6,10 @@
 	import { validator } from '@felte/validator-zod';
 	import { reporter } from '@felte/reporter-svelte';
 	import { graphql } from '$houdini';
-	import InputError from './helpers/InputError.svelte';
+	import InputError from '../helpers/InputError.svelte';
 	import wretch from 'wretch';
-	import GraphqlMutationError from './helpers/GraphqlMutationError.svelte';
-	import type { GraphqlError } from './helpers/graphql';
+	import GraphqlMutationError from '../helpers/GraphqlMutationError.svelte';
+	import type { GraphqlError } from '../helpers/graphql';
 	import { page } from '$app/stores';
 
 	let emailParams = $page.url.searchParams.get('email');

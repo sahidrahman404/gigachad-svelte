@@ -6,9 +6,9 @@
 	import { focusTrap } from '@skeletonlabs/skeleton';
 	import { createForm } from 'felte';
 	import { z } from 'zod';
-	import InputError from './helpers/InputError.svelte';
-	import type { GraphqlError } from './helpers/graphql';
-	import GraphqlMutationError from './helpers/GraphqlMutationError.svelte';
+	import InputError from '../helpers/InputError.svelte';
+	import type { GraphqlError } from '../helpers/graphql';
+	import GraphqlMutationError from '../helpers/GraphqlMutationError.svelte';
 	let isFocused: boolean = true;
 
 	const resendActivationSchema = z.object({
