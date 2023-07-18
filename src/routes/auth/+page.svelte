@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Signup from '$lib/components/Signup.svelte';
+	import Signup from '$lib/components/auth/Signup.svelte';
 	import { page } from '$app/stores';
-	import Signin from '$lib/components/Signin.svelte';
+	import Signin from '$lib/components/auth/Signin.svelte';
 
 	$: mode = $page.url.searchParams.get('mode');
 </script>
