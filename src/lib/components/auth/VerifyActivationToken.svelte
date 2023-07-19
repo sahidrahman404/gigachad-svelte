@@ -43,12 +43,14 @@
 				}
 			});
 			if (res.data && res.data.activateUser) {
-				const tokenPlainText = res.data.activateUser.tokenPlainText;
-				wretch(`http://localhost:4444/v1/tokens/set/${tokenPlainText}`)
+				const token = res.data.activateUser.tokenPlainText;
+				wretch(`http://localhost:4444/v1/tokens/set/${token}`)
 					.options({ credentials: 'include', mode: 'cors' })
 					.get()
-					.json((res) => console.log(res));
-				window.location.assign('/dashboard');
+					.json(() => {
+						window.location.assign('/dashboard');
+					});
+				return;
 			}
 			graphqlMutationError = res.errors;
 		},
