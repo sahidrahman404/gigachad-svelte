@@ -1,4 +1,8 @@
-import { transform } from './transformer';
+import {
+	transform,
+	type GetTransformedURL,
+	getTransformedURL
+} from './transformer';
 
 export type Layout = 'fixed' | 'constrained' | 'fullWidth';
 
@@ -284,31 +288,18 @@ export const getSrcSet = async ({
 }: Omit<ImageSourceOptions, 'src'> & {
 	src: URL | string;
 }): Promise<string> => {
-	const transformer = transform;
-
 	breakpoints ||= getBreakpoints({ width, layout });
-	const result = await Promise.all(
-		breakpoints
-			.sort((a, b) => a - b)
-			.map(async (bp) => {
-				let transformedHeight;
-				if (height && aspectRatio) {
-					transformedHeight = Math.round(bp / aspectRatio);
-				}
-				// Not sure why TS isn't narrowing the type here
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				const transformed = await transformer!({
-					url: src,
-					width: bp,
-					height: transformedHeight
-				});
-				if (transformed) {
-					return `${transformed.toString()} ${bp}w`;
-				}
-				return '';
-			})
-	);
-	return result.join(',\n');
+
+	const bp = breakpoints.sort((a, b) => a - b);
+	const response = await getTransformedURL({
+		width: width ?? null,
+		height: height ?? null,
+		src: src,
+		breakPoint: bp,
+		aspectRatio: aspectRatio ?? null
+	});
+	const result = response.join(',\n');
+	return result;
 };
 
 /**

@@ -20,8 +20,8 @@ export const transform: UrlTransformer = async ({
 	width,
 	height
 }) => {
-	const w = width ? String(width) : '';
-	const h = height ? String(height) : '';
+	const w = width ? width : null;
+	const h = height ? height : null;
 	const url = await getSignedURL(w, h, originalUrl);
 	return url;
 };
@@ -30,7 +30,11 @@ type SignedURL = {
 	signedURL: string;
 };
 
-async function getSignedURL(width: string, height: string, src: string | URL) {
+async function getSignedURL(
+	width: number | null,
+	height: number | null,
+	src: string | URL
+) {
 	const response = await fetch('http://localhost:4444/v1/tokens/img', {
 		method: 'POST',
 		headers: {
@@ -44,4 +48,24 @@ async function getSignedURL(width: string, height: string, src: string | URL) {
 	});
 	const result = (await response.json()) as SignedURL;
 	return result.signedURL;
+}
+
+export type GetTransformedURL = {
+	width: number | null;
+	height: number | null;
+	breakPoint: number[];
+	aspectRatio: number | null;
+	src: string | URL;
+};
+
+export async function getTransformedURL(payload: GetTransformedURL) {
+	const response = await fetch('http://localhost:4444/v1/tokens/imgs', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	});
+	const result = (await response.json()) as string[];
+	return result;
 }
