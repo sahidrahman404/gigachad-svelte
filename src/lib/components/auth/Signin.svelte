@@ -10,6 +10,7 @@
 	import { focusTrap } from '@skeletonlabs/skeleton';
 	import { reporter } from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
+	import wretch from 'wretch';
 
 	let isFocused: boolean = true;
 
@@ -47,10 +48,18 @@
 			});
 			if (res.data && res.data.createAuthenticationToken) {
 				if (res.data.createAuthenticationToken.user.activated === 0) {
-					goto(`/auth/verify?email=${res.data.createAuthenticationToken.user.email}`);
+					goto(
+						`/auth/verify?email=${res.data.createAuthenticationToken.user.email}`
+					);
 					return;
 				}
-				goto('/dashboard');
+				const token = res.data.createAuthenticationToken.tokenPlainText;
+				wretch(`http://localhost:4444/v1/tokens/set/${token}`)
+					.options({ credentials: 'include', mode: 'cors' })
+					.get()
+					.json(() => {
+						window.location.assign('/dashboard');
+					});
 				return;
 			}
 			graphqlMutationError = res.errors;
