@@ -5,6 +5,7 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import styleObjectToCss from './styleObjectToCss';
+	import { fade } from 'svelte/transition';
 
 	type $$Props = BaseImageProps;
 
@@ -55,12 +56,10 @@
 </script>
 
 {#await tranformedProps.load()}
-	<div
-		class="placeholder animate-pulse"
-		style="{width} {height}"
-	/>
+	<div class="placeholder animate-pulse" style="{width} {height}" />
 {:then}
 	<img
+		transition:fade
 		alt={$tranformedProps.alt}
 		style={$tranformedProps.style}
 		{...$tranformedProps.rest}
