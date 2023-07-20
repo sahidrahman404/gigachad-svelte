@@ -1,3 +1,5 @@
+import { PUBLIC_BASE_DOMAIN } from '$env/static/public';
+
 export interface UrlTransformerOptions {
 	/** The original URL of the image */
 	url: string | URL;
@@ -35,7 +37,7 @@ async function getSignedURL(
 	height: number | null,
 	src: string | URL
 ) {
-	const response = await fetch('http://localhost:4444/v1/tokens/img', {
+	const response = await fetch(`${PUBLIC_BASE_DOMAIN}/v1/tokens/img`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -59,7 +61,7 @@ export type GetTransformedURL = {
 };
 
 export async function getTransformedURL(payload: GetTransformedURL) {
-	const response = await fetch('http://localhost:4444/v1/tokens/imgs', {
+	const response = await fetch(`${PUBLIC_BASE_DOMAIN}/v1/tokens/imgs`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

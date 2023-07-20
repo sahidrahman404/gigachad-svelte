@@ -1,8 +1,4 @@
-import {
-	transform,
-	type GetTransformedURL,
-	getTransformedURL
-} from './transformer';
+import { transform, getTransformedURL } from './transformer';
 
 export type Layout = 'fixed' | 'constrained' | 'fullWidth';
 

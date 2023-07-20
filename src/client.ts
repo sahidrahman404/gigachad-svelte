@@ -1,7 +1,8 @@
 import { HoudiniClient } from '$houdini';
+import { PUBLIC_BASE_DOMAIN } from '$env/static/public';
 
 export default new HoudiniClient({
-	url: 'http://localhost:4444/query',
+	url: `${PUBLIC_BASE_DOMAIN}/query`,
 	fetchParams({ session }) {
 		//@ts-ignore
 		if (session.token) {
