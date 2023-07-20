@@ -28,8 +28,8 @@
 		};
 	};
 	let { style: parentStyle, ...props } = $$props as $$Props;
-	$: width = `w-[${$$props.width}px]`;
-	$: height = `h-[${$$props.height}px]`;
+	let width = `width: ${$$props.width}px;`;
+	let height = `height: ${$$props.height}px;`;
 	const tranformedProps = asyncReadable(undefined, async () => {
 		if (browser) {
 			const {
@@ -55,7 +55,10 @@
 </script>
 
 {#await tranformedProps.load()}
-	<div class="placeholder animate-pulse {width} {height}" />
+	<div
+		class="placeholder animate-pulse"
+		style="{width} {height}"
+	/>
 {:then}
 	<img
 		alt={$tranformedProps.alt}
