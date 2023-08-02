@@ -11,6 +11,7 @@
 	import { reporter } from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import wretch from 'wretch';
+	import { PUBLIC_BASE_DOMAIN } from '$env/static/public';
 
 	let isFocused: boolean = true;
 
@@ -54,10 +55,10 @@
 					return;
 				}
 				const token = res.data.createAuthenticationToken.tokenPlainText;
-				wretch(`http://localhost:4444/v1/tokens/set/${token}`)
+				wretch(`${PUBLIC_BASE_DOMAIN}/v1/tokens/set/${token}`)
 					.options({ credentials: 'include', mode: 'cors' })
 					.get()
-					.json(() => {
+					.json((res) => {
 						window.location.assign('/dashboard');
 					});
 				return;

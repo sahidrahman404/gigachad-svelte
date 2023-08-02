@@ -11,6 +11,7 @@
 	import GraphqlMutationError from '../helpers/GraphqlMutationError.svelte';
 	import type { GraphqlError } from '../helpers/graphql';
 	import { page } from '$app/stores';
+	import { PUBLIC_BASE_DOMAIN } from '$env/static/public';
 
 	let emailParams = $page.url.searchParams.get('email');
 	$: email = emailParams ? emailParams : '(your email)';
@@ -44,7 +45,7 @@
 			});
 			if (res.data && res.data.activateUser) {
 				const token = res.data.activateUser.tokenPlainText;
-				wretch(`http://localhost:4444/v1/tokens/set/${token}`)
+				wretch(`${PUBLIC_BASE_DOMAIN}/v1/tokens/set/${token}`)
 					.options({ credentials: 'include', mode: 'cors' })
 					.get()
 					.json(() => {
