@@ -10,7 +10,8 @@ export default new HoudiniClient({
 				headers: {
 					//@ts-ignore
 					Authorization: `Bearer ${session.token}`
-				}
+				},
+				credential: true
 			};
 		}
 		return {};
