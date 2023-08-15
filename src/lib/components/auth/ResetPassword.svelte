@@ -83,6 +83,7 @@
 							id="token"
 							class="input"
 							title="Input (token)"
+							autocomplete="off"
 							required
 						/>
 						<InputError forInput="token" />
@@ -98,6 +99,7 @@
 							id="password"
 							title="Input (password)"
 							class="input"
+							autocomplete="new-password"
 							required
 						/>
 						<InputError forInput="passwrod" />
@@ -115,6 +117,7 @@
 							id="confirm-password"
 							title="Input (confirm-password)"
 							class="input"
+							autocomplete="new-password"
 							required
 						/>
 						<InputError forInput="confirmPassword" />

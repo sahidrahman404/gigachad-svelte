@@ -124,6 +124,7 @@
 							id="password"
 							class="input"
 							title="Input (password)"
+							autocomplete="on"
 							required
 						/>
 						<InputError forInput="password" />
