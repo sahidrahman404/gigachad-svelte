@@ -8,11 +8,11 @@
 	<div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
 		<div>
 			<h1
-				class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white"
+				class="block text-3xl font-bold text-token sm:text-4xl lg:text-6xl lg:leading-tight"
 			>
 				Let's get healthy with <span class="text-primary-600">Gigachad</span>
 			</h1>
-			<p class="mt-3 text-lg text-gray-800 dark:text-gray-400">
+			<p class="mt-3 text-lg text-token">
 				Say goodbye to generic workout plans! With Gigachad you can easily
 				create personalized workout programs tailored to your specific needs and
 				fitness level.
@@ -21,7 +21,7 @@
 			<!-- Buttons -->
 			<div class="mt-7 grid gap-3 w-full sm:inline-flex">
 				<a
-					class="btn btn-lg variant-filled-secondary inline-flex justify-center items-center gap-x-3 text-center"
+					class="btn btn-lg variant-filled-primary inline-flex justify-center items-center gap-x-3 text-center"
 					href={redirect}
 				>
 					Get started
