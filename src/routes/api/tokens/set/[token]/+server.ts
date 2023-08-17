@@ -6,8 +6,6 @@ export const GET: RequestHandler = ({ params, cookies }) => {
 		return json({ success: false }, { status: 400 });
 	}
 
-	console.log('token', token);
-
 	cookies.set('auth', token, {
 		path: '/',
 		maxAge: 3600,
