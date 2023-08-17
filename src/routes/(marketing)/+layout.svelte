@@ -1,8 +1,4 @@
 <script lang="ts">
-	import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
-	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
-	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	// Most of your app wide CSS should be put in this file
 	import '../../app.postcss';
 	import { AppBar, AppShell } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
@@ -14,7 +10,7 @@
 <AppShell>
 	<svelte:fragment slot="header">
 		{#if !$user.data?.getUser}
-			<AppBar class="bg-surface-100-800-token p-4 shadow-xl">
+			<AppBar>
 				<svelte:fragment slot="lead"
 					><a class="text-primary-600 text-2xl font-bold" href="/">Gigachad</a
 					></svelte:fragment
@@ -29,7 +25,7 @@
 				</svelte:fragment>
 			</AppBar>
 		{:else}
-			<AppBar class="bg-surface-100-800-token p-4 shadow-xl">
+			<AppBar>
 				<svelte:fragment slot="lead"
 					><a class="text-primary-600 text-2xl font-bold" href="/">Gigachad</a
 					></svelte:fragment
