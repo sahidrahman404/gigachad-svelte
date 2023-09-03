@@ -31,7 +31,7 @@
 					></svelte:fragment
 				>
 				<svelte:fragment slot="trail">
-					<a class="btn variant-filled-primary" href="/dashboard"
+					<a class="btn variant-filled-primary" href="/dashboard/routines"
 						>Dashboard</a
 					>
 				</svelte:fragment>

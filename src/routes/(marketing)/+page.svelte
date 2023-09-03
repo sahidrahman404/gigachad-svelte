@@ -6,7 +6,7 @@
 	$: ({ User } = data);
 	let redirect: string;
 	$: $User.data?.getUser !== null
-		? (redirect = '/dashboard')
+		? (redirect = '/dashboard/routines')
 		: (redirect = '/auth?mode=signup');
 </script>
 
