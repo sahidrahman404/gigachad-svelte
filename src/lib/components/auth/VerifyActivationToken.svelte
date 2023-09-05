@@ -48,7 +48,7 @@
 					.options({ credentials: 'include', mode: 'cors' })
 					.get()
 					.json(() => {
-						window.location.assign('/dashboard');
+						window.location.assign('/dashboard/routines');
 					});
 				return;
 			}
