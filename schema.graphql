@@ -123,6 +123,10 @@ https://relay.dev/graphql/connections.htm#sec-Cursor
 """
 scalar Cursor
 
+type DeletedID {
+  id: ID
+}
+
 type Equipment implements Node {
   exercises: [Exercise!]
   id: ID!
@@ -585,8 +589,9 @@ type Mutation {
   createActivationToken(input: ActivationTokenInput!): String
   createAuthenticationToken(input: LoginInput!): AuthenticationToken
   createPasswordResetToken(input: ResetPasswordInput!): String
-  createRoutine(input: CreateRoutineInput!): RoutineEdge
+  createRoutine(input: CreateRoutineInput!): Routine
   createUser(input: CreateUserInput!): User!
+  deleteRoutine(id: ID!): DeletedID
   updateUserPassword(input: ResetUserPasswordInput!): String
 }
 
