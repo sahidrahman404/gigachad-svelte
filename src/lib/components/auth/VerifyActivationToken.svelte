@@ -7,10 +7,10 @@
 	import { reporter } from '@felte/reporter-svelte';
 	import { graphql } from '$houdini';
 	import InputError from '../helpers/InputError.svelte';
-	import wretch from 'wretch';
 	import GraphqlMutationError from '../helpers/GraphqlMutationError.svelte';
 	import type { GraphqlError } from '../helpers/graphql';
 	import { page } from '$app/stores';
+	import setTokenWithRedirect from '../helpers/setToken';
 
 	let emailParams = $page.url.searchParams.get('email');
 	$: email = emailParams ? emailParams : '(your email)';
@@ -44,12 +44,10 @@
 			});
 			if (res.data && res.data.activateUser) {
 				const token = res.data.activateUser.tokenPlainText;
-				wretch(`/api/tokens/set/${token}`)
-					.options({ credentials: 'include', mode: 'cors' })
-					.get()
-					.json(() => {
-						window.location.assign('/dashboard/routines');
-					});
+				setTokenWithRedirect({
+					token: token,
+					redirectTo: '/dashboard/routines'
+				})
 				return;
 			}
 			graphqlMutationError = res.errors;

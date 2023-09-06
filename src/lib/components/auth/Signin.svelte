@@ -10,11 +10,12 @@
 	import { focusTrap } from '@skeletonlabs/skeleton';
 	import { reporter } from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
-	import wretch from 'wretch';
+	import setTokenWithRedirect from '../helpers/setToken';
 
 	let isFocused: boolean = true;
 
 	let currentPath = $page.url.pathname;
+	let fromURL = $page.url.searchParams.get('redirectTo');
 
 	const signinSchema = z.object({
 		email: z.string().email(),
@@ -54,12 +55,17 @@
 					return;
 				}
 				const token = res.data.createAuthenticationToken.tokenPlainText;
-				wretch(`/api/tokens/set/${token}`)
-					.options({ credentials: 'include', mode: 'cors' })
-					.get()
-					.json(() => {
-						window.location.assign('/dashboard/routines');
+				if (!fromURL) {
+					setTokenWithRedirect({
+						token: token,
+						redirectTo: '/dashboard/routines'
 					});
+					return;
+				}
+				setTokenWithRedirect({
+					token: token,
+					redirectTo: fromURL
+				});
 				return;
 			}
 			graphqlMutationError = res.errors;
