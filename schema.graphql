@@ -688,7 +688,6 @@ type Query {
     """Filtering options for Exercises returned from the connection."""
     where: ExerciseWhereInput
   ): ExerciseConnection!
-  getUser: User
   musclesGroups(
     """Returns the elements in the list that come after the specified cursor."""
     after: Cursor
@@ -773,6 +772,7 @@ type Query {
     """Filtering options for Users returned from the connection."""
     where: UserWhereInput
   ): UserConnection!
+  viewer: User
   workoutLogs(
     """Returns the elements in the list that come after the specified cursor."""
     after: Cursor
