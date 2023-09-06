@@ -3,9 +3,9 @@
 	import type { PageData } from './$houdini';
 
 	export let data: PageData;
-	$: ({ User } = data);
+	$: ({ UserSessionMarketing } = data);
 	let redirect: string;
-	$: $User.data?.getUser !== null
+	$: $UserSessionMarketing.data?.viewer !== null
 		? (redirect = '/dashboard/routines')
 		: (redirect = '/auth?mode=signup');
 </script>

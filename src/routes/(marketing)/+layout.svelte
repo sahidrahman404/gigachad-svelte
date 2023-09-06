@@ -1,15 +1,17 @@
 <script lang="ts">
 	import '../../app.postcss';
 	import { AppBar, AppShell } from '@skeletonlabs/skeleton';
-	import { page } from '$app/stores';
-	import type { UserStore } from '$houdini';
+	import type { LayoutData } from './$houdini';
 
-	$: user = $page.data['User'] as UserStore;
+	export let data: LayoutData;
+	$: ({ UserSessionMarketing } = data);
+
+	$: user = $UserSessionMarketing.data?.viewer
 </script>
 
 <AppShell>
 	<svelte:fragment slot="header">
-		{#if !$user.data?.getUser}
+		{#if !user}
 			<AppBar>
 				<svelte:fragment slot="lead"
 					><a class="text-primary-600 text-2xl font-bold" href="/">Gigachad</a
